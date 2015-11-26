@@ -1,2 +1,2 @@
-require 'helper'
-require File.dirname(__FILE__) + '/../lib/awrence/ext/hash/to_camel_keys'
+require_relative 'helper'
+require File.dirname(__FILE__) + '/../lib/awrence/core_extensions/hash/to_camel_keys'

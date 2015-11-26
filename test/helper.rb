@@ -13,7 +13,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'awrence'
 
-class MiniTest::Unit::TestCase
+class MiniTest::Test
 end
 
-MiniTest::Unit.autorun
+MiniTest.autorun

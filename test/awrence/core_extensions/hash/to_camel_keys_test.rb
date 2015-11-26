@@ -1,5 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../test_awrence.rb')
 
+using CoreExtensions
+
 describe "A Hash" do
   describe "with snake keys" do
     describe "which are JSON-style strings" do
@@ -10,7 +12,7 @@ describe "A Hash" do
 
         describe "non-destructive conversion to CamelCase" do
           before do
-            @camelized = @hash.to_camel_keys
+            @camelized = @hash.to_camel_keys({ first_upper: true })
           end
 
           it "camelizes the key" do
@@ -32,7 +34,7 @@ describe "A Hash" do
 
         describe "non-destructive conversion to camelBack" do
           before do
-            @camelized = @hash.to_camelback_keys
+            @camelized = @hash.to_camel_keys
           end
 
           it "camelizes the key" do
@@ -68,7 +70,7 @@ describe "A Hash" do
 
         describe "non-destructive conversion to CamelCase" do
           before do
-            @camelized = @hash.to_camel_keys
+            @camelized = @hash.to_camel_keys({ first_upper: true })
           end
 
           it "recursively camelizes the keys on the top level of the hash" do
@@ -101,7 +103,7 @@ describe "A Hash" do
 
         describe "non-destructive conversion to camelBack" do
           before do
-            @camelized = @hash.to_camelback_keys
+            @camelized = @hash.to_camel_keys
           end
 
           it "recursively camelizes the keys on the top level of the hash" do
@@ -131,6 +133,17 @@ describe "A Hash" do
             assert_equal "jill_peanut", @camelized["vegetableTypes"].last["peanutNamesAndSpouses"].last["sammyThePeanut"]
           end
         end
+
+        describe "non-destructive conversion do camelBack ignoring slashes" do
+          before do
+            hash = { "my_first/key" => "fooBar" }
+            @camelized = hash.to_camel_keys({ ignore_slash: true })
+          end
+
+          it "non-destructive conversion to camelBack ignore_slashes" do
+            assert_equal "myFirst/key", @camelized.keys.first
+          end
+        end
       end
     end
   end
@@ -149,7 +162,7 @@ describe "A Hash" do
 
     describe "to_camelback_keys" do
       it "doesn't get camelized" do
-        @camelized = @hash.to_camelback_keys
+        @camelized = @hash.to_camel_keys
         assert_equal "With Spaces", @camelized.keys.first
       end
     end
