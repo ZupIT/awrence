@@ -1,4 +1,4 @@
-module CoreExtensions
+module Awrence
   refine Hash do
     def to_camel_keys(options = {})
       opts = { first_upper: false, ignore_slash: false }.merge(options)

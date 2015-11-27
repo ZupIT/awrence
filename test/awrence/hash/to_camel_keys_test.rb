@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../test_awrence.rb')
+require File.expand_path(File.dirname(__FILE__) + '/../../test_awrence.rb')
 
-using CoreExtensions
+using Awrence
 
 describe "A Hash" do
   describe "with snake keys" do
