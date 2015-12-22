@@ -30,6 +30,14 @@ describe "A Hash" do
           it "leaves the original hash untouched" do
             assert_equal(@hash.keys.first, "first_key")
           end
+
+          it "camelize only the informed keys" do
+            hash = { "first_key" => "fooBar", "second_key" => "barFoo" }
+            camelized = hash.to_camel_keys({ only: ["first_key"] })
+
+            assert_equal(camelized.keys[0], "firstKey")
+            assert_equal(camelized.keys[1], "second_key")
+          end
         end
 
         describe "non-destructive conversion to camelBack" do
